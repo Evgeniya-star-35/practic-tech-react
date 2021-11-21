@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import shortid from "shortid";
-import { BaseContext } from "../BaseProvider/BaseProvider";
-import Form from "../_share/Form/Form";
-import GoBackHeader from "../_share/GoBackHeader/GoBackHeader";
-import CategoriesList from "../CategoriesList/CategoriesList";
-import transactionFormOptios from "../../assets/options/transactionFormOptions";
+import { useContext, useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import shortid from 'shortid';
+import { BaseContext } from '../BaseProvider/BaseProvider';
+import Form from '../_share/Form/Form';
+import GoBackHeader from '../_share/GoBackHeader/GoBackHeader';
+import CategoriesList from '../CategoriesList/CategoriesList';
+import transactionFormOptios from '../../assets/options/transactionFormOptions';
 
 const TransactionPage = ({ match, history, location }) => {
   const {
@@ -17,20 +17,21 @@ const TransactionPage = ({ match, history, location }) => {
   const { push } = history;
 
   const [form, setForm] = useState({
-    date: "",
-    time: "",
-    category: transType === "incomes" ? "Зарплата" : "Еда",
-    sum: "",
-    currency: "USD",
-    comment: "",
+    date: '',
+    time: '',
+    category: transType === 'incomes' ? 'Зарплата' : 'Еда',
+    sum: '',
+    currency: 'USD',
+    comment: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
-    setForm((prevForm) => ({ ...prevForm, [name]: value }));
+    setForm(prevForm => ({ ...prevForm, [name]: value }));
   };
 
   const handleSubmit = () => {
+    console.log(transType);
     addTransaction({
       transaction: { ...form, id: shortid.generate() },
       transType,
@@ -40,8 +41,8 @@ const TransactionPage = ({ match, history, location }) => {
 
   const openCategoryList = () => {
     const newLocation = {
-      pathname: match.url + "/cat-list",
-      state: { string: "newStateLoacation", from: location },
+      pathname: match.url + '/cat-list',
+      state: { string: 'newStateLoacation', from: location },
     };
     push(newLocation);
   };
@@ -49,11 +50,11 @@ const TransactionPage = ({ match, history, location }) => {
   return (
     <section>
       <GoBackHeader
-        title={transType === "costs" ? "Расходы" : "Доходы"}
+        title={transType === 'costs' ? 'Расходы' : 'Доходы'}
         handleGoBack={toggleActivePage}
       />
       <Switch>
-        <Route path={match.path + "/cat-list"}>
+        <Route path={match.path + '/cat-list'}>
           <CategoriesList />
         </Route>
         <Route>
