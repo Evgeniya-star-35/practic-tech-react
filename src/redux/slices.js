@@ -1,17 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit';
-const add = 'add';
-const getAll = 'getAll';
-const remove = 'remove';
+import { addCost, addIncome, removeCost, removeIncome } from './actions';
+
 const transactionSlice = createSlice({
   name: 'transactions',
   initialState: {
     costs: [],
-    incoms: [],
+    incomes: [],
   },
   extraReducers: {
-    [add]: (state, action) => {},
-    [getAll]: (state, action) => {},
-    [remove]: (state, action) => {},
+    [addCost]: (state, action) => {
+      return {
+        ...state,
+        costs: [...state.costs, action.payload],
+      };
+    },
+    'incomes/addIncome': (state, action) => {
+      return {
+        ...state,
+        incomes: [...state.incomes, action.payload],
+      };
+    },
+    'costs/removeCost': (state, action) => {
+      return {
+        ...state,
+        costs: state.costs.filter(cost => cost.id !== action.payload),
+      };
+    },
+    'incomes/removeIncome': (state, action) => {
+      return {
+        ...state,
+        incomes: state.incomes.filter(income => income.id !== action.payload),
+      };
+    },
   },
 });
+// export const { addCost, addIncome, removeCost, removeIncome } = transactionSlice.actions
 export default transactionSlice.reducer;
