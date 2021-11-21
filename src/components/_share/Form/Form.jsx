@@ -1,4 +1,6 @@
-import LabelInput from "../LabelInput/LabelInput";
+import LabelInput from '../LabelInput/LabelInput';
+// import { addCost } from '../../../redux/actions';
+// import { useDispatch } from 'react-redux';
 
 const Form = ({
   cbOnSubmit,
@@ -7,21 +9,27 @@ const Form = ({
   handleChange,
   handleClick,
 }) => {
-  const handleSubmit = (e) => {
+  // const dispatch = useDispatch();
+
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log('submit');
+    // dispatch(
+    //   addCost({
+    //     value: '',
+    //   }),
+    // );
     cbOnSubmit();
   };
   return (
     <form onSubmit={handleSubmit}>
       <button type="submit">Ok</button>
-      {formOptions.map((option) => (
+      {formOptions.map(option => (
         <LabelInput
           key={option.name}
           {...option}
           value={dataForm[option.name]}
-          cbOnChange={option.type !== "button" ? handleChange : null}
-          cbOnClick={option.type === "button" ? handleClick : null}
+          cbOnChange={option.type !== 'button' ? handleChange : null}
+          cbOnClick={option.type === 'button' ? handleClick : null}
         />
       ))}
     </form>
